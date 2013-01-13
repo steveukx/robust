@@ -1,0 +1,12 @@
+{
+   "name":              "robust",
+   "description":       "Robust - it watches, it wraps, it can kill and restart",
+   "version":           "0.0.0",
+   "dependencies": {
+      "commands":       "",
+      "subscribable":   ""
+   },
+   "devDependencies": {
+      "unit-test":      "*"
+   }
+}
