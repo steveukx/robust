@@ -72,7 +72,7 @@
     */
    RunConfiguration.prototype._getStream = function(logType) {
       var handle = [this.outLog, this.errLog][logType];
-      if(typeof handle == 'string') {
+      if(handle && typeof handle == 'string') {
          handle = FileSystem.openSync(handle, 'a');
       }
       return handle;
@@ -82,7 +82,7 @@
     * Gets an array of stream descriptors that should be used when creating a child process with this configuration
     */
    RunConfiguration.prototype.getStreams = function() {
-      var ignore = 'ignore';
+      var ignore = this.env && this.env.NODE_ENV != 'production' ? 'pipe' : 'ignore';
 
       return [
          ignore,

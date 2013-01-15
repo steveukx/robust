@@ -10,6 +10,7 @@ var Runnable = require('./runnable.js');
 var Pool = module.exports = function() {
    this._runnables = [];
 };
+Pool.prototype = Object.create(require('subscribable').prototype);
 
 /**
  * Add a new runnable to the list.
@@ -54,5 +55,5 @@ Pool.prototype.stop = function() {
 Pool.prototype._onRunnableExit = function(runnable, err) {
    this.fire('child.exception', runnable, err);
 
-   runnable.start();
+//   runnable.start();
 };

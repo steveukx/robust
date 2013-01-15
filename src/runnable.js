@@ -30,14 +30,27 @@ Runnable.prototype._onRunnableExit = function(code, signal) {
  * Starts up this process
  */
 Runnable.prototype.start = function() {
+//   this._child = ChildProcess.spawn(
+//       this._runConfiguration.binary,
+//       this._runConfiguration.args, {
+//          stdio: this._runConfiguration.getStreams(),
+//          env: this._runConfiguration.env,
+//          cwd: this._runConfiguration.cwd
+//       }
+//   );
+
    this._child = ChildProcess.spawn(
-       this._runConfiguration.binary,
-       this._runConfiguration.args, {
-          stdio: this._runConfiguration.getStreams(),
-          env: this._runConfiguration.env,
-          cwd: this._runConfiguration.cwd
+       'node',
+       ['examples/server-pool/server.js'], {
+          stdio: 'inherit'
+          ,
+          env: this._runConfiguration.env
+//          ,
+//          cwd: this._runConfiguration.cwd
        }
    );
+
+   this._child.on('exit', this._onRunnableExit.bind(this));
 };
 
 /**
