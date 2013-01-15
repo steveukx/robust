@@ -2,9 +2,9 @@
    "name":              "robust",
    "description":       "Robust - it watches, it wraps, it can kill and restart",
    "version":           "0.0.0",
+   "main":              "src/robust.js",
    "dependencies": {
-      "commands":       "",
-      "subscribable":   ""
+      "commands":       ""
    },
    "devDependencies": {
       "unit-test":      "*"

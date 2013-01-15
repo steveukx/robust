@@ -1,19 +1,13 @@
 {
    "defaults": {
-      "cwd": "",
-      "bin": "node",
-      "args": ["examples/server-pool/server.js"]
+      "port": 9878
    },
-   "processes": [
+   "envs": [
       {
-         "env": {
-            "port": 9876
-         }
+         "port": 9876
       },
       {
-         "env": {
-            "port": 9877
-         }
+         "port": 9877
       }
    ]
 }

@@ -10,4 +10,8 @@ var server = HTTP.createServer(function(req, res) {
 
 //server.listen(process.env.port);
 
-console.log(process.env);
+console.log(process.env.port);
+
+setTimeout(function() {
+   process.exit();
+}, Math.random() * 1000);
