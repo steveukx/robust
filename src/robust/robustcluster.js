@@ -74,8 +74,6 @@
       for(var i = 0, max = processCount || this._configurationFactory.getProcessCount(); i < max; i++) {
          this._createProcess(i);
       }
-
-      setTimeout(this.stop.bind(this), 5000);
       return this;
    };
 
