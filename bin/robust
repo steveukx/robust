@@ -1,5 +1,57 @@
 #!/usr/bin/env node
 
-require('../src/robust.js');
+var Commands = require('commands');
+var Path = require('path');
+var FileSystem = require('fs');
+var ChildProcess = require('child_process');
+var PidFile;
 
+if(Commands.get('cwd')) {
+   try {
+      process.chdir(Commands.get('cwd'));
+   }
+   catch(e) { console.error("Unable to set working directory"); process.exit(); }
+}
 
+PidFile = Path.join(process.cwd(), Commands.get('pid', '.robust.pid'));
+
+if(FileSystem.existsSync(PidFile)) {
+   if(Commands.get('stop', false)) {
+      stop();
+   }
+   else
+   if(Commands.get('restart', false)) {
+      stop(robust);
+   }
+   else {
+      console.error("Warning, a matching process already exists.\nTerminate that process by using either " +
+                        "--restart or --stop in the command string"); process.exit();
+   }
+}
+else {
+   if(!Commands.get('stop')) {
+      robust();
+   }
+}
+
+function stop(then) {
+   ChildProcess.exec('kill `cat "' + PidFile + '"`', function() {
+      FileSystem.unlinkSync(PidFile);
+      then && then();
+   });
+}
+
+function robust() {
+   var scriptPath = Path.join(__dirname, '../src/robust.js'),
+       scriptArgs = [scriptPath].concat(process.argv.slice(2));
+
+   var childProcess = ChildProcess.spawn('node', [scriptPath].concat(process.argv.slice(2)), {
+      cwd: process.cwd(),
+      stdio: 'ignore',
+      detached: true
+   });
+
+   FileSystem.writeFileSync(PidFile, childProcess.pid, 'utf-8');
+
+   childProcess.unref();
+}
