@@ -72,3 +72,42 @@ processes as cores available. To explicitly set the number of processes to creat
 `-processes NUMBER` or add a `processes` attribute to the configuration file.
 
 
+Working Directory
+-----------------
+
+The `robust` command can be called from anywhere, if you want to reset the current working directory, add the `-cwd` command
+line option:
+
+    cd /
+    robust -cwd /path/to/project
+
+This will affect the path that is checked for the `robust.json` and will also set where the pid file for the service is
+stored.
+
+Custom PID File
+---------------
+
+To make it easy to stop or restart existing processes, the process id of the robust managed service is stored in a dot
+prefixed file in the current working directory. To set the name of the pid file, add the `-pid` option to the command line:
+
+    robust -pid .custom-pid
+
+Using a custom pid file name allows the same working directory to be used for multiple services all managed through robust.
+*Note, the custom pid file name must be in the command line string rather than the configuration file as it is used before
+the configuration file is read.*
+
+Stopping Robust
+===============
+
+Stopping a service that is being managed by robust is just a case of adding either `--stop` to the command line string
+to stop the service, or `--restart` to both stop and start the service:
+
+    robust --restart
+
+If the robust service was started with a custom working directory, reuse that working directory with the addtional action
+in the command line, for example:
+
+    cd /
+    robust -cwd /path/to/project --stop
+
+
