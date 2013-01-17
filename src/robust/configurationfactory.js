@@ -22,7 +22,7 @@
 
       this._options = Util.merge(Commands.all(), this._options);
       this._options.defaults = this._options.defaults || {};
-      this._options.envs = this._options.envs || [];
+      this._options.instances = this._options.instances || [];
 
       this._script = this._toAbsolutePath(this._options.script || 'server.js');
       if(!FileSystem.existsSync(this._script)) {
@@ -90,7 +90,7 @@
     */
    ConfigurationFactory.prototype.getConfiguration = function(processIndex) {
       return Util.merge(
-                  this._options.envs[processIndex] || {},
+                  this._options.instances[processIndex] || {},
                   this._options.defaults);
    };
 
@@ -115,7 +115,7 @@
     * @return {Number}
     */
    ConfigurationFactory.prototype.getProcessCount = function() {
-      return Math.max(2, this._options.processes || require('os').cpus().length);
+      return Math.max(ConfigurationFactory.MINIMUM_PROCESSES, this._options.processes || require('os').cpus().length);
    };
 
    module.exports = ConfigurationFactory

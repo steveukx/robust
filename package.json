@@ -1,7 +1,7 @@
 {
    "name":              "robust",
    "description":       "Robust - it watches, it wraps, it can kill and restart",
-   "version":           "0.0.1",
+   "version":           "0.0.2",
    "main":              "src/robust.js",
    "bin": {
       "robust":         "./bin/robust"

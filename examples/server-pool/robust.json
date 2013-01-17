@@ -2,7 +2,7 @@
    "defaults": {
       "port": 9878
    },
-   "envs": [
+   "instances": [
       {
          "port": 9876
       },

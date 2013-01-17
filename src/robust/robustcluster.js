@@ -5,6 +5,7 @@
    /**
     *
     * @constructor
+    * @param {ConfigurationFactory} configurationFactory
     */
    function RobustCluster(configurationFactory) {
       this._configurationFactory = configurationFactory;
