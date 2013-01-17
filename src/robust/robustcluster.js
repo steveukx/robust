@@ -6,9 +6,11 @@
     *
     * @constructor
     * @param {ConfigurationFactory} configurationFactory
+    * @param {Logger} logger
     */
-   function RobustCluster(configurationFactory) {
+   function RobustCluster(configurationFactory, logger) {
       this._configurationFactory = configurationFactory;
+      this._logger = logger;
       this._workers = {};
 
       this._configureCluster();
@@ -44,9 +46,9 @@
       var processIndex = this._workers[worker.id];
       delete this._workers[worker.id];
 
-      console.log('###############################');
-      console.log('## PROCESS ' + processIndex + ' has terminated');
-      console.log('###############################');
+      this._logger.log('###############################');
+      this._logger.log('## PROCESS ' + processIndex + ' has terminated');
+      this._logger.log('###############################');
 
       if(!worker.suicide) {
          this._createProcess(processIndex);
@@ -61,9 +63,9 @@
       var worker = Cluster.fork(this._configurationFactory.getConfiguration(processIndex));
       this._workers[worker.id] = processIndex;
 
-      console.log('###############################');
-      console.log('## PROCESS ' + processIndex + ' has been created as worker ' + worker.id);
-      console.log('###############################');
+      this._logger.log('###############################');
+      this._logger.log('## PROCESS ' + processIndex + ' has been created as worker ' + worker.id);
+      this._logger.log('###############################');
    };
 
    /**
@@ -89,7 +91,7 @@
 
       return this;
    };
-   
+
    module.exports = RobustCluster;
 
 }());

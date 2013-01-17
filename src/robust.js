@@ -1,7 +1,11 @@
 
 var Commands = require('commands'),
-    RobustCluster = require('./robust/robustcluster');
-    ConfigurationFactory = require('./robust/configurationfactory');
+    RobustCluster = require('./robust/robustcluster'),
+    ConfigurationFactory = require('./robust/configurationfactory'),
+    Logger = require('./robust/logger'),
 
-new RobustCluster(new ConfigurationFactory(Commands.get('config'))).start();
+    configurationFactory = new ConfigurationFactory(Commands.get('config')),
+    logger = new Logger(configurationFactory.getOption('log', configurationFactory.getOption('verbose', false))),
+
+    robustCluster = new RobustCluster(configurationFactory, logger).start();
 
