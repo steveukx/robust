@@ -1,7 +1,11 @@
 {
    "name":              "robust",
    "description":       "Robust - it watches, it wraps, it can kill and restart",
-   "version":           "0.0.3",
+   "version":           "0.0.4",
+   "author":            "Steve King <steve@mydev.co>",
+   "contributors": [ {  "name": "Steve King", "email": "steve@mydev.co" } ],
+   "keywords":[         "cluster", "pool", "server-admin"],
+   "repository":        "git://github.com/steveukx/robust",
    "main":              "src/robust.js",
    "bin": {
       "robust":         "./bin/robust"
