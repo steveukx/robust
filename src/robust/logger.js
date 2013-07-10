@@ -62,7 +62,7 @@
       }
 
       for(var logLevel in Logger.LogLevels) {
-         if(Logger.LogLevels >= level) {
+         if(Logger.LogLevels[logLevel] >= level) {
             this[logLevel] = console[logLevel].bind(console);
          }
       }
