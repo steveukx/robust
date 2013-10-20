@@ -1,7 +1,7 @@
 {
    "name":              "robust",
    "description":       "Robust - it watches, it wraps, it can kill and restart",
-   "version":           "0.0.5",
+   "version":           "0.0.6",
    "author":            "Steve King <steve@mydev.co>",
    "contributors": [ {  "name": "Steve King", "email": "steve@mydev.co" } ],
    "keywords":[         "cluster", "pool", "server-admin"],

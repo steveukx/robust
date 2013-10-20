@@ -4,7 +4,8 @@ var Commands = require('commands');
 var Path = require('path');
 var FileSystem = require('fs');
 var ChildProcess = require('child_process');
-var PidFile;
+
+var PidFile, ConfigFile, Config = {};
 
 if(Commands.get('cwd')) {
    try {
@@ -14,13 +15,21 @@ if(Commands.get('cwd')) {
 }
 
 PidFile = Path.join(process.cwd(), Commands.get('pid', '.robust.pid'));
+ConfigFile = Commands.get('config', Path.join(process.cwd(), 'robust.json'));
+if(FileSystem.existsSync(ConfigFile)) {
+   try { Config = require(ConfigFile); }
+   catch (e) {
+      console.error("Configuration file specified as `%s` but could not be read.", ConfigFile);
+      process.exit();
+   }
+}
 
 if(FileSystem.existsSync(PidFile)) {
    if(Commands.get('stop', false)) {
       stop();
    }
    else
-   if(Commands.get('restart', false)) {
+   if(Commands.get('restart', Config.restart || false)) {
       stop(robust);
    }
    else {

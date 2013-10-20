@@ -1,4 +1,4 @@
-.idea
+.idea/
+node_modules/
 *.iml
-node_modules
-npm-debug.log
+*.log
