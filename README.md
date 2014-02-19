@@ -32,10 +32,10 @@ Process Arguments
 -----------------
 
 The script that robust runs will be passed the command line arguments that were given to robust, to change the arguments
-add an `args` attribute to the configuration JSON, or supply as many arguments as required using the `-args` command
+add an `args` attribute to the configuration JSON (eg: `"args": ["-first", "first value"]`), or supply as many arguments as required using the `-args` command
 line option. For example:
 
-    robust -args first -args "second option"
+    robust -args "-first" -args "first value"
 
 Each instance of your script will receive the same arguments which will be available as usual as `process.argv`.
 
